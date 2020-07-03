@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SchoolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MarksSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdStudents" Type="int" Nullable="false" />
+          <Property Name="IdSubjects" Type="int" Nullable="false" />
+          <Property Name="Mark" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="Class" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubjectsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TeachersSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="bigint" Nullable="false" />
+          <Property Name="IdSubject" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_MarksSet_StudentsSet">
+          <End Role="StudentsSet" Type="Self.StudentsSet" Multiplicity="1" />
+          <End Role="MarksSet" Type="Self.MarksSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarksSet">
+              <PropertyRef Name="IdStudents" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarksSet_SubjectsSet">
+          <End Role="SubjectsSet" Type="Self.SubjectsSet" Multiplicity="1" />
+          <End Role="MarksSet" Type="Self.MarksSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarksSet">
+              <PropertyRef Name="IdSubjects" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeachersSet_SubjectsSet1">
+          <End Role="SubjectsSet" Type="Self.SubjectsSet" Multiplicity="1" />
+          <End Role="TeachersSet" Type="Self.TeachersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeachersSet">
+              <PropertyRef Name="IdSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SchoolModelContainer">
+          <EntitySet Name="MarksSet" EntityType="Self.MarksSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentsSet" EntityType="Self.StudentsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubjectsSet" EntityType="Self.SubjectsSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeachersSet" EntityType="Self.TeachersSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MarksSet_StudentsSet" Association="Self.FK_MarksSet_StudentsSet">
+            <End Role="StudentsSet" EntitySet="StudentsSet" />
+            <End Role="MarksSet" EntitySet="MarksSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarksSet_SubjectsSet" Association="Self.FK_MarksSet_SubjectsSet">
+            <End Role="SubjectsSet" EntitySet="SubjectsSet" />
+            <End Role="MarksSet" EntitySet="MarksSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeachersSet_SubjectsSet1" Association="Self.FK_TeachersSet_SubjectsSet1">
+            <End Role="SubjectsSet" EntitySet="SubjectsSet" />
+            <End Role="TeachersSet" EntitySet="TeachersSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MarksSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdStudents" Type="Int32" Nullable="false" />
+          <Property Name="IdSubjects" Type="Int32" Nullable="false" />
+          <Property Name="Mark" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StudentsSet" Relationship="Self.FK_MarksSet_StudentsSet" FromRole="MarksSet" ToRole="StudentsSet" />
+          <NavigationProperty Name="SubjectsSet" Relationship="Self.FK_MarksSet_SubjectsSet" FromRole="MarksSet" ToRole="SubjectsSet" />
+        </EntityType>
+        <EntityType Name="StudentsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MarksSet" Relationship="Self.FK_MarksSet_StudentsSet" FromRole="StudentsSet" ToRole="MarksSet" />
+        </EntityType>
+        <EntityType Name="SubjectsSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MarksSet" Relationship="Self.FK_MarksSet_SubjectsSet" FromRole="SubjectsSet" ToRole="MarksSet" />
+          <NavigationProperty Name="TeachersSet" Relationship="Self.FK_TeachersSet_SubjectsSet1" FromRole="SubjectsSet" ToRole="TeachersSet" />
+        </EntityType>
+        <EntityType Name="TeachersSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="Int64" Nullable="false" />
+          <Property Name="IdSubject" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SubjectsSet" Relationship="Self.FK_TeachersSet_SubjectsSet1" FromRole="TeachersSet" ToRole="SubjectsSet" />
+        </EntityType>
+        <Association Name="FK_MarksSet_StudentsSet">
+          <End Role="StudentsSet" Type="Self.StudentsSet" Multiplicity="1" />
+          <End Role="MarksSet" Type="Self.MarksSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarksSet">
+              <PropertyRef Name="IdStudents" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarksSet_SubjectsSet">
+          <End Role="SubjectsSet" Type="Self.SubjectsSet" Multiplicity="1" />
+          <End Role="MarksSet" Type="Self.MarksSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MarksSet">
+              <PropertyRef Name="IdSubjects" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeachersSet_SubjectsSet1">
+          <End Role="SubjectsSet" Type="Self.SubjectsSet" Multiplicity="1" />
+          <End Role="TeachersSet" Type="Self.TeachersSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectsSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeachersSet">
+              <PropertyRef Name="IdSubject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MarksSet" EntityType="Self.MarksSet" />
+          <EntitySet Name="StudentsSet" EntityType="Self.StudentsSet" />
+          <EntitySet Name="SubjectsSet" EntityType="Self.SubjectsSet" />
+          <EntitySet Name="TeachersSet" EntityType="Self.TeachersSet" />
+          <AssociationSet Name="FK_MarksSet_StudentsSet" Association="Self.FK_MarksSet_StudentsSet">
+            <End Role="StudentsSet" EntitySet="StudentsSet" />
+            <End Role="MarksSet" EntitySet="MarksSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarksSet_SubjectsSet" Association="Self.FK_MarksSet_SubjectsSet">
+            <End Role="SubjectsSet" EntitySet="SubjectsSet" />
+            <End Role="MarksSet" EntitySet="MarksSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeachersSet_SubjectsSet1" Association="Self.FK_TeachersSet_SubjectsSet1">
+            <End Role="SubjectsSet" EntitySet="SubjectsSet" />
+            <End Role="TeachersSet" EntitySet="TeachersSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SchoolModelContainer" CdmEntityContainer="SchoolEntities">
+          <EntitySetMapping Name="MarksSet">
+            <EntityTypeMapping TypeName="SchoolModel.MarksSet">
+              <MappingFragment StoreEntitySet="MarksSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdStudents" ColumnName="IdStudents" />
+                <ScalarProperty Name="IdSubjects" ColumnName="IdSubjects" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsSet">
+            <EntityTypeMapping TypeName="SchoolModel.StudentsSet">
+              <MappingFragment StoreEntitySet="StudentsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubjectsSet">
+            <EntityTypeMapping TypeName="SchoolModel.SubjectsSet">
+              <MappingFragment StoreEntitySet="SubjectsSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeachersSet">
+            <EntityTypeMapping TypeName="SchoolModel.TeachersSet">
+              <MappingFragment StoreEntitySet="TeachersSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="IdSubject" ColumnName="IdSubject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

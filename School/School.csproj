@@ -33,8 +33,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,8 +61,74 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMarks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMarks.Designer.cs">
+      <DependentUpon>FormMarks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStudents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStudents.Designer.cs">
+      <DependentUpon>FormStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSubjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSubjects.Designer.cs">
+      <DependentUpon>FormSubjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTeachers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTeachers.Designer.cs">
+      <DependentUpon>FormTeachers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MarksSet.cs">
+      <DependentUpon>ModelWFSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelWFSchool.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelWFSchool.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelWFSchool.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelWFSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelWFSchool.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelWFSchool.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentsSet.cs">
+      <DependentUpon>ModelWFSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectsSet.cs">
+      <DependentUpon>ModelWFSchool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TeachersSet.cs">
+      <DependentUpon>ModelWFSchool.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMarks.resx">
+      <DependentUpon>FormMarks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStudents.resx">
+      <DependentUpon>FormStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSubjects.resx">
+      <DependentUpon>FormSubjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTeachers.resx">
+      <DependentUpon>FormTeachers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +137,16 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EntityDeploy Include="ModelWFSchool.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelWFSchool.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelWFSchool.edmx.diagram">
+      <DependentUpon>ModelWFSchool.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +159,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\28-281003_stafford-county-public-school-logo-stafford-county-public-schools.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelWFSchool.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelWFSchool.edmx</DependentUpon>
+      <LastGenOutput>ModelWFSchool.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelWFSchool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelWFSchool.edmx</DependentUpon>
+      <LastGenOutput>ModelWFSchool.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

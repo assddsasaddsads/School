@@ -10,11 +10,40 @@ using System.Windows.Forms;
 
 namespace School
 {
-    public partial class Form1 : Form
+    public partial class Menu : Form
     {
-        public Form1()
+        public Menu()
         {
             InitializeComponent();
+        }
+
+        private void buttonStudents_Click(object sender, EventArgs e)
+        {
+            Form formStudents = new FormStudents();
+            formStudents.Show();
+        }
+
+        private void buttonSubjects_Click(object sender, EventArgs e)
+        {
+            Form formSubjects = new FormSubjects();
+            formSubjects.Show();
+        }
+
+        private void buttonTeachers_Click(object sender, EventArgs e)
+        {
+            Form formTeachers = new FormTeachers();
+            formTeachers.Show();
+        }
+
+        private void buttonMarks_Click(object sender, EventArgs e)
+        {
+            Form formMarks = new FormMarks();
+            formMarks.Show();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
